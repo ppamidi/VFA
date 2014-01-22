@@ -9,126 +9,93 @@ class AccessToken
      *  @ORM\Id 
      *  @ORM\Column(type="integer")
      *  */
-    protected $user_id;
+    protected $userId;
     
     /** @ORM\Column(type="string") */
-    protected $network_id;
+    protected $networkId;
 
     /** @ORM\Column(type="string") */
-    protected $network_name;
+    protected $networkName;
     
     /** @ORM\Column(type="string") */
-    protected $token;
+    protected $tokenId;
     
     /** @ORM\Column(type="date") */
-    protected $created_at;
+    protected $createdAt;
     
+    /** @ORM\Column(type="date") */
+    protected $updatedAt;
+        
     /** @ORM\Column(type="string") */
-    protected $full_name;
+    protected $fullName;
     
-    public function getUserID()
+    public function getUserId()
     {
-    	return $this->user_id;
+    	return $this->userId;
     }
     
-    public function setUserID($value)
+    public function setUserId($value)
     {
-    	$this->user_id = $value;
+    	$this->userId = $value;
     }
     
-    public function getNetworkID()
+    public function getNetworkId()
     {
-    	return $this->network_id;
+    	return $this->networkId;
     }
     
-    public function setNetworkID($value)
+    public function setNetworkId($value)
     {
-    	$this->network_id = $value;
+    	$this->networkId = $value;
     }
     
     public function getNetworkName()
     {
-    	return $this->network_name;
+    	return $this->networkName;
     }
     
     public function setNetworkName($value)
     {
-    	$this->network_name = $value;
+    	$this->networkName = $value;
     }
     
-    public function getToken()
+    public function getTokenId()
     {
-    	return $this->token;
+    	return $this->tokenId;
     }
     
-    public function setToken($value)
+    public function setTokenId($value)
     {
-    	$this->token = $value;
+    	$this->tokenId = $value;
     }
     
     public function getCreatedAt()
     {
-    	return $this->created_at;
+    	return $this->createdAt;
     }
     
     public function setCreatedAt($value)
     {
-    	$this->created_at = date("Y-m-d H:i:s",strtotime($value));
+    	$this->createdAt = date("Y-m-d H:i:s",strtotime($value));
+    }
+    public function getUpdatedAt()
+    {
+    	return $this->updatedAt;
+    }
+    
+    public function setUpdatedAt($value)
+    {
+    	$this->updatedAt = date("Y-m-d H:i:s",strtotime($value));
     }
     
     public function getFullName()
     {
-    	return $this->full_name;
+    	return $this->fullName;
     }
         
     public function setFullName($value)
     {
-    	$this->full_name = $value;
+    	$this->fullName = $value;
     }
-    
-    
-    
-    //upon construction, map the values
-    //from the $accesstoken_row if available
-//     public function __construct($token_row = null)
-//     {
-//     	if( !is_null($token_row) && $token_row instanceof Zend_Db_Table_Row ) {
-//     		$this->user_id = $token_row->user_id;
-//     		$this->network_id = $token_row->network_id;
-//     		$this->network_name = $token_row->network_name;
-//     		$this->token = $token_row->token;
-//     		$this->created_at = $token_row->created_at;
-//     	    $this->full_name = $token_row->full_name;
-//     	}
-//     }
-    
-//     public function exchangeArray($data)
-//     {
-        
-//     }
-    
-    //magic function __set to set the
-    //attributes of the User model
-//     public function __set($name, $value)
-//     {
-//     	//set the attribute with the value
-//     	$this->$name = $value;
-//     }
-    
-//     public function __get($name)
-//     {
-//     	return $this->$name;
-//     }
-    
-//     public function retrieveToken($response){
-        
-//             $this->user_id = $response['user']['id'];
-//     		$this->network_id = $response['network']['id'];
-//     		$this->network_name = $response['network']['name'];
-//     		$this->token = $response['access_token']['token'];
-//     		$this->created_at = $response['access_token']['created_at'];
-//     	    $this->full_name = $response['user']['full_name'];
-//     }
-
 }
 

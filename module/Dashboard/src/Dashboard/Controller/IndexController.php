@@ -13,35 +13,97 @@ namespace Dashboard\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Form\Factory;
 use Dashboard\Form\CreateTeamForm;
+use Team\Entity\Team;
+use Doctrine\ORM\EntityManager;
+use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
 
 class IndexController extends AbstractActionController
 {
+    /**
+     * @var EntityManager
+     */
+    protected $entityManager;
+    
+    /**
+     * Sets the EntityManager
+     *
+     * @param EntityManager $em
+     * @access protected
+     * @return PostController
+     */
+    protected function setEntityManager(EntityManager $em)
+    {
+    	$this->entityManager = $em;
+    	return $this;
+    }
+    
+    /**
+     * Returns the EntityManager
+     *
+     * Fetches the EntityManager from ServiceLocator if it has not been initiated
+     * and then returns it
+     *
+     * @access protected
+     * @return EntityManager
+     */
+    protected function getEntityManager()
+    {
+    	if (null === $this->entityManager) {
+    		$this->setEntityManager($this->getServiceLocator()->get('Doctrine\ORM\EntityManager'));
+    	}
+    	return $this->entityManager;
+    }
+    
     public function indexAction()
     {
         $this->layout('layout/home');
-        $user = $this->getEvent()->getRouteMatch()->getParam('user');
-        if ($user) {    	
-            $form = new CreateTeamForm();
-            return array("form" => $form);
+
+        $team = new Team();
+        $form = new CreateTeamForm();
+        $form->setHydrator(new DoctrineEntity($this->getEntityManager(), 'Team\Entity\Team'));
+        $form->setInputFilter($team->getInputFilter());
+        $form->bind($team);
+        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+        	$form->setData($request->getPost());
+        	if ($form->isValid()) {
+        		$em->persist($team);
+        		$em->flush();
+        		
+        		return $this-> redirect()->toRoute('dashboard/foo');
+        	}
         }else{
-            return $this-> redirect()->toRoute('home');
+            return array(
+            		'form' => $form
+            );
         } 
-       
-        return array();
+  
     }
 
     public function fooAction()
     {  
-        $this->layout('layout/home');
-        $request = $this->getRequest();
+        $this->layout('layout/home');  
         
-        $user = $this->getEvent()->getRouteMatch()->getParam('user');;
-        if ($user) {
-        	$form = new CreateTeamForm();
-            return array("form" => $form);
-        }else{
-            return $this-> redirect()->toRoute('home');
+        if ($user = $this->identity()) {
+        	 $user = $this->identity();
         }
+       
+        $team = new Team();
+        $form = new CreateTeamForm();
+        $form->setHydrator(new DoctrineEntity($this->getEntityManager(), 'Team\Entity\Team'));
+        $form->setInputFilter($team->getInputFilter());
+        $form->bind($team);
+        $em = $this->getEntityManager();
+        
+        $teams = $em->getRepository('Team\Entity\Team')->findAll();
+        
+        
+         if ($user) {      
+           	return array("form" => $form, "user" => $user, "teams" => $teams);
+         }else {
+             return array("form" => $form, "teams" => $teams);
+         }        
         
     }
 }

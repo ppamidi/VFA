@@ -11,34 +11,101 @@ namespace User\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Json\Json;
-use Application\Entity\User;
+use User\Entity\User;
+use Zend\View\Model\ViewModel;
+use Zend\View\View;
+use Doctrine\ORM\EntityManager;
 
 class IndexController extends AbstractActionController
 {
-    public function indexAction()
+    /**
+     * @var EntityManager
+     */
+    protected $entityManager;
+    
+    /**
+     * Sets the EntityManager
+     *
+     * @param EntityManager $em
+     * @access protected
+     * @return PostController
+     */
+    protected function setEntityManager(EntityManager $em)
     {
-        $response = Json::decode($this->getRequest()->getPost('response'), TRUE);
-        $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $user =User::retrieveUser($response, $objectManager);
-
-         
-        if ($user && $user->getVerified()){
+    	$this->entityManager = $em;
+    	return $this;
+    }
+    
+    /**
+     * Returns the EntityManager
+     *
+     * Fetches the EntityManager from ServiceLocator if it has not been initiated
+     * and then returns it
+     *
+     * @access protected
+     * @return EntityManager
+     */
+    protected function getEntityManager()
+    {
+    	if (null === $this->entityManager) {
+    		$this->setEntityManager($this->getServiceLocator()->get('Doctrine\ORM\EntityManager'));
+    	}
+    	return $this->entityManager;
+    }
+    
+    public function validateAction(){
         
-        	return $this->forward()->dispatch('Dashboard/Controller/Index',array(
-        			'action' => 'foo',
-        			'user'   => $user
-        	)) ;
-        }else{
-        	return $this-> redirect()->toRoute('/');
+        $response = Json::decode($this->getRequest()->getPost('response'), TRUE);    
+        if ($response) {
+            
+         	$userEmail = $response['user']['contact']['email_addresses'][0]['address']; 	
+         	$user = User::retrieveUser($response, $this->getEntityManager());
+         	
+         	if (!$user) {
+         		$user = new User();
+         		$user->persistUser($response, $this->getEntityManager());
+         	}
+         	
+        	$authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+        	 
+        	$adapter = $authService->getAdapter();
+        	$adapter->setIdentityValue($userEmail);
+        	$adapter->setCredentialValue(1);
+        	$authResult = $authService->authenticate();
+        	 
+        	if ($authResult->isValid()){
+        		return $this->redirect()->toRoute('dashboard', array(
+        				'action' =>  'foo',
+        		));
+        	}else{
+        		return $this-> redirect()->toRoute('home');
+        	};
+        }else {
+        	return $this-> redirect()->toRoute('home');
         }
         
+    }
+    
+    public function indexAction()
+    {
         return array();
     }
 
+    public function retrieveUserAction(){   
+        $response = Json::decode($_POST['user'], true);
+        $userEmail = $response[0]['contact']['email_addresses'][0]['address'];
+        $userImage = $response[0]['mugshot_url'];
+        $userName = $response[0]['full_name'];  
+       
+        $view = new ViewModel(array('name' => $userName, 'email' => $userEmail, 'image' => $userImage));
+        $view->setTerminal(true);
+        $view->setTemplate('userMediaThumbnail.phtml');
+        return $view;
+    }
+    
     public function fooAction()
     {
-        // This shows the :controller and :action parameters in default route
-        // are working when you browse to /index/index/foo
+
         return array();
     }
 }

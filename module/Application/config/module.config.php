@@ -92,14 +92,6 @@ return array(
     ),
     
     'doctrine' => array(
-    		'authentication' => array(
-    				'orm_default' => array(
-    						'object_manager' => 'Doctrine\ORM\EntityManager',
-    						'identity_class' => 'Application\Entity\User',
-    						'identity_property' => 'email_address',
-  
-    				),
-    		),
     		'driver' => array(
     				'application_entities' => array(
     						'class' =>'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
@@ -113,5 +105,5 @@ return array(
     						)
     				)
     		)
-    ),
+    )
 );

@@ -74,37 +74,24 @@
                     </a>
                 </div>
                 <div class="panel-body">
-                
-                    <div class="row">
+                     <div class="row">
                        <ul class="thumbnails list-unstyled">
-                          <li class="col-xs-6 col-sm-4 col-md-4">
-                            <a href="#" class="thumbnail">
-                              <img data-src="holder.js/150x90" alt="150x90" style="width: 150px; height: 90px;" src="mySrc">
-                            </a>
-                          </li>
-                          <li class="col-xs-6 col-sm-4 col-md-4">
-                            <a href="#" class="thumbnail">
-                              <img data-src="holder.js/150x90" alt="150x90" style="width: 150px; height: 90px;" src="mySrc">
-                            </a>
-                          </li>
-                          <li class="col-xs-6 col-sm-4 col-md-4">
-                            <a href="#" class="thumbnail">
-                              <img data-src="holder.js/150x90" alt="150x90" style="width: 150px; height: 90px;" src="mySrc">
-                            </a>
-                          </li>
-                          <li class="col-xs-6 col-sm-4 col-md-4">
-                            <a href="#" class="thumbnail">
-                              <img data-src="holder.js/150x90" alt="150x90" style="width: 150px; height: 90px;" src="mySrc">
-                            </a>
-                          </li>
+                       
+                       <?php  $teams = $this->teams;
+                               foreach ($teams as $team){
+                         ?>
+                          <li class="col-sm-4 col-md-4 col-lg-4">
+                            <div  class="thumbnail">
+                               <p align="center"> <?php echo $team->getTeamName();?></p>
+                                <a href="<?php echo $this->url('team', array('team' => $team->getTeamId())); ?>">
+                                    <img data-src="holder.js/120x120" class="img-rounded" alt=<?php echo $team->getTeamName();?> style="width: 150px; height: 90px;" src="mySrc">
+                                </a>  
+                            </div>
+                           </li>
                           
-                          <li class="col-xs-6 col-sm-4 col-md-4">
-                            <a href="#" class="thumbnail">
-                              <img data-src="holder.js/150x90" alt="150x90" style="width: 150px; height: 90px;" src="mySrc">
-                            </a>
-                          </li>
-                       </ul>
-                     
+                        <?php }?>
+                        </ul>  
+                   
                     </div>      
                     <ul class="pager">
                         <li class="previous disabled"><a href="#">&larr; Older</a></li>
@@ -116,55 +103,13 @@
         <div class="col-md-6">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    Users
+                    Members
+                     <a class="btn btn-xs pull-right btn-danger" data-toggle="modal" data-target="#searchModal">
+                      <i class="fa fa-plus 2x"></i>
+                    </a>
                 </div>
                 <div class="panel-body">
-<!--                     <table class="table table-hover"> -->
-<!--                        <thead> -->
-<!--                           <tr> -->
-<!--                             <th>Page <i class="fa fa-sort"></i></th> -->
-<!--                             <th>Members <i class="fa fa-sort"></i></th> -->
-<!--                             <th>Growth <i class="fa fa-sort"></i></th> -->
-<!--                           </tr> -->
-<!--                         </thead> -->
-<!--                 <tbody> -->
-<!--                   <tr> -->
-<!--                     <td>Page 1</td> -->
-<!--                     <td>1265</td> -->
-<!--                     <td>32.3%</td> -->
-<!--                   </tr> -->
-<!--                   <tr> -->
-<!--                     <td>Page 2</td> -->
-<!--                     <td>261</td> -->
-<!--                     <td>33.3%</td> -->
-<!--                   </tr> -->
-<!--                   <tr> -->
-<!--                     <td>Page 3</td> -->
-<!--                     <td>665</td> -->
-<!--                     <td>21.3%</td> -->
-<!--                  </tr> -->
-<!--                   <tr> -->
-<!--                     <td>Page 4</td> -->
-<!--                     <td>9516</td> -->
-<!--                     <td>89.3%</td> -->
-<!--                   </tr> -->
-<!--                   <tr> -->
-<!--                     <td>Page 5</td> -->
-<!--                     <td>23</td> -->
-<!--                     <td>34.3%</td> -->
-<!--                   </tr> -->
-<!--                   <tr> -->
-<!--                     <td>Page 6</td> -->
-<!--                     <td>421</td> -->
-<!--                     <td>60.3%</td> -->
-<!--                   </tr> -->
-<!--                   <tr> -->
-<!--                     <td>Page 7</td> -->
-<!--                     <td>1233</td> -->
-<!--                     <td>93.2%</td> -->
-<!--                   </tr> -->
-<!--                 </tbody> -->
-<!--               </table> -->
+                    <?php $user = $this->user; var_dump($user);?>
              </div>
             </div>
         </div>
@@ -174,22 +119,11 @@
                     Recent Activity
                 </div>
                 <div class="panel-body">
-                
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            Activity 1
-                        </li>
-                        <li class="list-group-item">
-                            Activity 2
-                        </li>
-                        <li class="list-group-item">
-                            Activity 3
-                        </li>
-                        <li class="list-group-item">
-                            Activity 4
-                        </li>
-                        
-                    </ul>
+                    <?php 
+                        $teams = $this->teams;
+                        var_dump($teams);
+                    ?>
+                    
                 </div>
             </div>
         </div>
@@ -200,7 +134,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Add Team</h4>
+        <h4>Enter Team Details</h4>
       </div>
       <div class="modal-body">
         <?php
@@ -210,3 +144,28 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>Search User</h4>
+      </div>
+      <div class="modal-body" id="searchModalBody">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Email Address" name="srch-term" id="srch-term">
+            <div class="input-group-btn">
+              <button onclick="searchUser()"  class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+            </div>
+          </div>
+       </div>  
+      <div  class="modal-footer" id="searchModalFooter">
+        
+     </div>
+    </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+

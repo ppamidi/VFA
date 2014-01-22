@@ -1,5 +1,5 @@
 <?php
-namespace Application\Entity;
+namespace User\Entity;
 use Doctrine\ORM\Mapping as ORM;
 /**
  *  @ORM\Entity
@@ -12,28 +12,28 @@ class User {
 	 * @ORM\GeneratedValue(strategy="NONE")
 	 * @var int
 	 */
-	protected $user_id;
+	protected $userId;
 
 	/**
 	 * @ORM\Column(type="integer")
 	 * @var int
 	 */
-	protected $network_id;
+	protected $networkId;
 	
 	/**
 	 * @ORM\Column(type="string", length=64)
 	 * @var string
 	 */
-	protected $network_name;
+	protected $networkName;
 	
 	/**
 	 * @ORM\Column(type="string", length=64)
 	 * @var string
 	 */
-	protected $job_title;
+	protected $jobTitle;
 	
 	/**
-	 * @ORM\Column(type="string", length=64)
+	 * @ORM\Column(type="string", length=64, nullable = true)
 	 * @var string
 	 */
 	protected $location;
@@ -42,13 +42,13 @@ class User {
 	 * @ORM\Column(type="string", length=64)
 	 * @var string
 	 */
-	protected $first_name;
+	protected $firstName;
 	
 	/**
 	 * @ORM\Column(type="string", length=64)
 	 * @var string
 	 */
-	protected $last_name;
+	protected $lastName;
 	
 // 	/**
 // 	 * @ORM\Column(type="date", length=64)
@@ -66,7 +66,7 @@ class User {
 	 * @ORM\Column(type="string", length=255)
 	 * @var string
 	 */
-	protected $img_url;
+	protected $imgURL;
 	
 // 	/**
 // 	 * @ORM\Column(type="date", length=64)
@@ -90,11 +90,11 @@ class User {
 	 * @ORM\Column(type="string", length=255)
 	 * @var string
 	 */
-	protected $email_address;
+	protected $emailId;
 
 	/**
-	 * @ORM\Column(type="boolean")
-	 * @var string
+	 * @ORM\Column(type="integer")
+	 * @var int
 	 */
 	protected $verified;
 	
@@ -106,67 +106,67 @@ class User {
 	}
 	
 	/**
-	 * @param int $user_id
+	 * @param $userId
 	 */
-	public function setUserId($user_id) {
-		$this->user_id = $user_id;
+	public function setUserId($userId) {
+		$this->userId = $userId;
 		return $this;
 	}
 	
 	/**
-	 * @return the int
+	 * @return int
 	 */
 	public function getNetworkId() {
-		return $this->network_id;
+		return $this->networkId;
 	}
 	
 	/**
-	 * @param int $network_id
+	 * @param $networkId
 	 */
-	public function setNetworkId($network_id) {
-		$this->network_id = $network_id;
+	public function setNetworkId($networkId) {
+		$this->networkId = $networkId;
 		return $this;
 	}
 	
 	/**
-	 * @return the string
+	 * @return string
 	 */
 	public function getNetworkName() {
-		return $this->network_name;
+		return $this->networkName;
 	}
 	
 	/**
-	 * @param string $network_name
+	 * @param $networkName
 	 */
-	public function setNetworkName($network_name) {
-		$this->network_name = $network_name;
+	public function setNetworkName($networkName) {
+		$this->networkName = $networkName;
 		return $this;
 	}
 	
 	/**
-	 * @return the string
+	 * @return string
 	 */
 	public function getJobTitle() {
-		return $this->job_title;
+		return $this->jobTitle;
 	}
 	
 	/**
-	 * @param string $job_title
+	 * @param $jobTitle
 	 */
-	public function setJobTitle($job_title) {
-		$this->job_title = $job_title;
+	public function setJobTitle($jobTitle) {
+		$this->jobTitle = $jobTitle;
 		return $this;
 	}
 	
 	/**
-	 * @return the string
+	 * @return string
 	 */
 	public function getLocation() {
 		return $this->location;
 	}
 	
 	/**
-	 * @param string $location
+	 * @param $location
 	 */
 	public function setLocation($location) {
 		$this->location = $location;
@@ -174,32 +174,32 @@ class User {
 	}
 	
 	/**
-	 * @return the string
+	 * @return string
 	 */
 	public function getFirstName() {
-		return $this->first_name;
+		return $this->firstName;
 	}
 	
 	/**
-	 * @param string $first_name
+	 * @param $firstName
 	 */
-	public function setFirstName($first_name) {
-		$this->first_name = $first_name;
+	public function setFirstName($firstName) {
+		$this->firstName = $firstName;
 		return $this;
 	}
 	
 	/**
-	 * @return the string
+	 * @return string
 	 */
 	public function getLastName() {
-		return $this->last_name;
+		return $this->lastName;
 	}
 	
 	/**
-	 * @param string $last_name
+	 * @param $lastName
 	 */
-	public function setLastName($last_name) {
-		$this->last_name = $last_name;
+	public function setLastName($lastName) {
+		$this->lastName = $lastName;
 		return $this;
 	}
 	
@@ -219,14 +219,14 @@ class User {
 // 	}
 	
 	/**
-	 * @return the string
+	 * @return string
 	 */
 	public function getUrl() {
 		return $this->url;
 	}
 	
 	/**
-	 * @param string $url
+	 * @param $url
 	 */
 	public function setUrl($url) {
 		$this->url = $url;
@@ -234,17 +234,17 @@ class User {
 	}
 	
 	/**
-	 * @return the string
+	 * @return string
 	 */
-	public function getImgUrl() {
-		return $this->img_url;
+	public function getImgURL() {
+		return $this->imgURL;
 	}
 	
 	/**
-	 * @param string $img_url
+	 * @param $imgURL
 	 */
-	public function setImgUrl($img_url) {
-		$this->img_url = $img_url;
+	public function setImgUrl($imgURL) {
+		$this->imgURL = $imgURL;
 		return $this;
 	}
 	
@@ -279,7 +279,7 @@ class User {
 // 	}
 	
 	/**
-	 * @return the string
+	 * @return string
 	 */
 	public function getDepartment() {
 		return $this->department;
@@ -294,29 +294,29 @@ class User {
 	}
 	
 	/**
-	 * @return the string
+	 * @return string
 	 */
-	public function getEmailAddress() {
-		return $this->email_address;
+	public function getEmailId() {
+		return $this->emailId;
 	}
 	
 	/**
-	 * @param string $email_address
+	 * @param $emailId
 	 */
-	public function setEmailAddress($email_address) {
-		$this->email_address = $email_address;
+	public function setEmailId($emailId) {
+		$this->emailId = $emailId;
 		return $this;
 	}
 	
 	/**
-	 * @return the boolean
+	 * @return int
 	 */
 	public function getVerified() {
 		return $this->verified;
 	}
 	
 	/**
-	 * @param boolean $verified
+	 * @param int $verified
 	 */
 	public function setVerified($verfied) {
 		$this->verified = $verfied;
@@ -334,18 +334,17 @@ class User {
 	    $this->setLastName($response['user']['last_name']);
 	    //     	$this->setActivatedAt(date("Y-m-d H:i:s",strtotime($response['user']['activated_at'])));
 	    $this->setUrl($response['user']['url']);
-	    $this->setImgUrl($response['user']['mugshot_url_template']);
+	    $this->setImgURL($response['user']['mugshot_url']);
 	    //      $this->setHireDate(date("Y-m-d H:i:s",strtotime($response['user']['hire_date'])));
 	    //      $this->setBirthDate(date("Y-m-d H:i:s",strtotime($response['user']['birth_date'])));
 	    $this->setDepartment($response['user']['department']);
-	    $this->setEmailAddress($response['user']['contact']['email_addresses'][0]['address']);
-	    $this->setVerified(FALSE);
+	    $this->setEmailId($response['user']['contact']['email_addresses'][0]['address']);
+	    $this->setVerified(0);
 	    
 	}
 	
-	public static function findUser($response, $objectManager){    
-	    
-	    $user = $objectManager->find('Application\Entity\User', $response['user']['id']);    
+	public static function findUser($response, $objectManager){        
+	    $user = $objectManager->find('User\Entity\User', $response['user']['id']);    
 	    if ($user === null) {
 	        return FALSE;
 	    };
@@ -355,7 +354,7 @@ class User {
 	
 	public static function retrieveUser($response, $objectManager){
 	    if (User::findUser($response, $objectManager)) {
-	        return $objectManager->find('Application\Entity\User', $response['user']['id']); 
+	        return $objectManager->find('User\Entity\User', $response['user']['id']); 
 	    }
 	    
 	    return null;
@@ -369,6 +368,5 @@ class User {
 	         $objectManager->flush();
 	    }
 	}
-	
-	
+
 }
