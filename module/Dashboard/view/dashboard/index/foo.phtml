@@ -1,171 +1,44 @@
-<div class="row">
-  <div class="col-lg-12">
-    <ol class="breadcrumb">
-      <li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
-    </ol>
-  </div>
-</div>
-<div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-            <div class="panel panel-info"  id="dashBoardPanel" style="cursor: pointer;">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-6">
-                    <i class="fa fa-dashboard fa-5x"></i>
-                  </div>
-                  <div class="col-xs-6 text-right">
-                    <p class="announcement-heading">Dashboard</p>
-                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-            <div class="panel panel-warning"  id="productivityPanel" style="cursor: pointer;">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-6">
-                    <i class="fa fa-bar-chart-o fa-5x"></i>
-                  </div>
-                  <div class="col-xs-6 text-right">
-                    <p class="announcement-heading">Productivity</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-            <div class="panel panel-danger"  id="calendarPanel" style="cursor: pointer;">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-6">
-                    <i class="fa fa-calendar fa-5x"></i>
-                  </div>
-                  <div class="col-xs-6 text-right">
-                    <p class="announcement-heading">Calendar</p>
-                   </div>
-                </div>
-              </div>
-           </div>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-            <div class="panel panel-success"  id="postsPanel" style="cursor: pointer;">
-              <div class="panel-heading">
-                <div class="row">
-                  <div class="col-xs-6">
-                    <i class="fa fa-comments fa-5x"></i>
-                  </div>
-                  <div class="col-xs-6 text-right">
-                    <p class="announcement-heading">Posts</p>
-                  </div>
-                </div>
-              </div>
-          </div>
-         </div>
-</div><!-- /.row -->
-						
- <div class="row">
-        <div class="col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    Teams
-                    <a class="btn btn-xs pull-right btn-danger" data-toggle="modal" data-target="#myModal">
-                      <i class="fa fa-plus 2x"></i>
-                    </a>
-                </div>
-                <div class="panel-body">
-                     <div class="row">
-                       <ul class="thumbnails list-unstyled">
-                       
-                       <?php  $teams = $this->teams;
-                               foreach ($teams as $team){
-                         ?>
-                          <li class="col-sm-4 col-md-4 col-lg-4">
-                            <div  class="thumbnail">
-                               <p align="center"> <?php echo $team->getTeamName();?></p>
-                                <a href="<?php echo $this->url('team', array('team' => $team->getTeamId())); ?>">
-                                    <img data-src="holder.js/120x120" class="img-rounded" alt=<?php echo $team->getTeamName();?> style="width: 150px; height: 90px;" src="mySrc">
-                                </a>  
-                            </div>
-                           </li>
-                          
-                        <?php }?>
-                        </ul>  
-                   
-                    </div>      
-                    <ul class="pager">
-                        <li class="previous disabled"><a href="#">&larr; Older</a></li>
-                        <li class="next"><a href="#">Newer &rarr;</a></li>
-                     </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    Members
-                     <a class="btn btn-xs pull-right btn-danger" data-toggle="modal" data-target="#searchModal">
-                      <i class="fa fa-plus 2x"></i>
-                    </a>
-                </div>
-                <div class="panel-body">
-                    <?php $user = $this->user; var_dump($user);?>
-             </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    Recent Activity
-                </div>
-                <div class="panel-body">
-                    <?php 
-                        $teams = $this->teams;
-                        var_dump($teams);
-                    ?>
-                    
-                </div>
-            </div>
-        </div>
-</div><!--/row-->
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4>Enter Team Details</h4>
-      </div>
-      <div class="modal-body">
-        <?php
-            echo $this->form($form,null); 
-         ?>     
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<!-- Modal -->
-<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4>Search User</h4>
-      </div>
-      <div class="modal-body" id="searchModalBody">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Email Address" name="srch-term" id="srch-term">
-            <div class="input-group-btn">
-              <button onclick="searchUser()"  class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-            </div>
-          </div>
-       </div>  
-      <div  class="modal-footer" id="searchModalFooter">
-        
-     </div>
-    </div><!-- /.modal-content -->
-   </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-
+<!--<div class="row">-->
+<!--        <ul class="thumbnails list-unstyled">-->
+<!--          <li class="col-md-3">-->
+<!--            <a href="#" class="thumbnail">-->
+<!--              <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="mySrc">-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="col-md-3">-->
+<!--            <a href="#" class="thumbnail">-->
+<!--              <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="mySrc">-->
+<!--            </a>-->
+<!--          </li><li class="col-md-3">-->
+<!--            <a href="#" class="thumbnail">-->
+<!--              <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="mySrc">-->
+<!--            </a>-->
+<!--          </li><li class="col-md-3">-->
+<!--            <a href="#" class="thumbnail">-->
+<!--              <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="mySrc">-->
+<!--            </a>-->
+<!--          </li><li class="col-md-3">-->
+<!--            <a href="#" class="thumbnail">-->
+<!--              <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="mySrc">-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="col-md-3">-->
+<!--            <a href="#" class="thumbnail">-->
+<!--              <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="mySrc">-->
+<!--            </a>-->
+<!--          </li>-->
+<!--          <li class="col-md-3">-->
+<!--            <a href="#" class="thumbnail">-->
+<!--              <img data-src="holder.js/260x180" alt="260x180" style="width: 260px; height: 180px;" src="mySrc">-->
+<!--            </a>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </div>-->
+<!--        <ul class="pager">-->
+<!--          <li class="previous disabled"><a href="#">&larr; Older</a></li>-->
+<!--          <li class="next"><a href="#">Newer &rarr;</a></li>-->
+<!--        </ul>-->
+<?php
+ echo $this->form($form,null); 
+ ?>
+ 

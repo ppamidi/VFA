@@ -67,11 +67,11 @@ class Team implements InputFilterAwareInterface {
     
     /**
      * @access public
-     * @param string $team_name
+     * @param string $teamName
      * @return Team/Entity/Team
      */
-    public function setTeamName($team_name) {
-    	$this->teamName = $team_name;
+    public function setTeamName($teamName) {
+    	$this->teamName = $teamName;
     	return $this;
     }
     
@@ -89,8 +89,8 @@ class Team implements InputFilterAwareInterface {
      * @param string $team_sow
      * @return Team/Entity/Team
      */
-    public function setTeamSOW($team_sow) {
-    	$this->teamSOW = $team_sow;
+    public function setTeamSOW($teamSOW) {
+    	$this->teamSOW = $teamSOW;
     	return $this;
     }
     
@@ -107,8 +107,8 @@ class Team implements InputFilterAwareInterface {
      * @param string $team_desc
      * @return Team/Entity/Team
      */
-    public function setTeamDesc($team_desc) {
-    	$this->teamDesc = $team_desc;
+    public function setTeamDesc($teamDesc) {
+    	$this->teamDesc = $teamDesc;
     	return $this;
     }
     

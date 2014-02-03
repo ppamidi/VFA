@@ -24,9 +24,6 @@ return array(
         ),
     ),
     'view_manager' => array(
-        'template_map' => array(
-     	   'user/retrieve-user' =>  __DIR__ . '/../view/user/userThumbnail.phtml',     
-        ),
         'template_path_stack' => array(
             'User' => __DIR__ . '/../view',
         ),

@@ -1,0 +1,29 @@
+<div class="col-md-6">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Members
+            <a class="btn btn-xs pull-right btn-danger" data-toggle="modal" data-target="#searchModal">
+              <i class="fa fa-plus 2x"></i>
+            </a>
+        </div>
+        <div class="panel-body">
+             <div class="row">
+               <ul class="thumbnails list-unstyled">                      
+               <?php  $members = $this->members;
+                       foreach ($members as $member){
+                 ?>
+                  <li class="col-sm-4 col-md-4 col-lg-4">
+                    <a href="#">
+                        <img src="<?php echo $member->getImgURL();?>" class="img-rounded" alt=<?php echo $member->getFirstName();?> style="width: 90px; height: 90px;" src="mySrc">
+                    </a>  
+                  </li>         
+                <?php }?>
+                </ul>  
+            </div>      
+            <ul class="pager">
+                <li class="previous disabled"><a href="#">&larr; Older</a></li>
+                <li class="next"><a href="#">Newer &rarr;</a></li>
+             </ul>
+        </div>
+    </div>
+</div>

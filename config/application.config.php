@@ -11,7 +11,8 @@ return array(
         'Dashboard',
         'User',
         'Team',
-        'Member'
+        'Member',
+        'Services'
     ),
 
     // These are various options for the listeners attached to the ModuleManager

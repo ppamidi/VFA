@@ -1,9 +1,11 @@
-<div class="media">
+<div class="media well">
   <a class="pull-left" href="#">
     <img class="media-object" src=<?php echo $this->image;?> alt="">
   </a>
   <div class="media-body">
     <h4 class="media-heading"><?php echo $this->name;?></h4>
     <?php echo $this->email;?>
+     
+     <button onclick='addMember(<?php echo json_encode($this->response);?>)' class="pull-right btn btn-primary">Add</button>
   </div>
 </div>

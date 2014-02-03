@@ -2,12 +2,12 @@
 /**
  * Zend Framework (http://framework.zend.com/)
  *
- * @link      http://github.com/zendframework/Member for the canonical source repository
+ * @link      http://github.com/zendframework/Services for the canonical source repository
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Member;
+namespace Services;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
@@ -15,7 +15,6 @@ use Zend\Mvc\MvcEvent;
 
 class Module implements AutoloaderProviderInterface
 {
-   
     public function getAutoloaderConfig()
     {
         return array(
@@ -43,15 +42,5 @@ class Module implements AutoloaderProviderInterface
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
-        
-        $sharedEventManager = $eventManager->getSharedManager();
-        
-        $sharedEventManager->attach('Dashboard\Services\UpdateMemberService', 'updateList', function($e) {
-            $members = $this->getEntityManager()->getRepository('Member\Entity\Member')->findAll();
-            
-            
-            
-        }, 100);
-        
     }
 }

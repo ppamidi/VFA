@@ -9,7 +9,6 @@
 
 namespace Dashboard\Controller;
 
-// use Dashboard\Form\CreateTeamForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Form\Factory;
 use Dashboard\Form\CreateTeamForm;
@@ -54,7 +53,7 @@ class IndexController extends AbstractActionController
     	return $this->entityManager;
     }
     
-    public function indexAction()
+    public function fooAction()
     {
         $this->layout('layout/home');
 
@@ -68,10 +67,10 @@ class IndexController extends AbstractActionController
         if ($request->isPost()) {
         	$form->setData($request->getPost());
         	if ($form->isValid()) {
-        		$em->persist($team);
-        		$em->flush();
+        		$this->getEntityManager()->persist($team);
+        		$this->getEntityManager()->flush();
         		
-        		return $this-> redirect()->toRoute('dashboard/foo');
+        		return $this-> redirect()->toRoute('dashboard');
         	}
         }else{
             return array(
@@ -81,26 +80,26 @@ class IndexController extends AbstractActionController
   
     }
 
-    public function fooAction()
+    public function indexAction()
     {  
-        $this->layout('layout/home');  
+        $this->layout('layout/home', array('user' => $this->identity()));
         
         if ($user = $this->identity()) {
         	 $user = $this->identity();
         }
+        
+        
        
         $team = new Team();
         $form = new CreateTeamForm();
         $form->setHydrator(new DoctrineEntity($this->getEntityManager(), 'Team\Entity\Team'));
         $form->setInputFilter($team->getInputFilter());
-        $form->bind($team);
-        $em = $this->getEntityManager();
-        
-        $teams = $em->getRepository('Team\Entity\Team')->findAll();
-        
-        
-         if ($user) {      
-           	return array("form" => $form, "user" => $user, "teams" => $teams);
+        $form->bind($team);  
+        $teams = $this->getEntityManager()->getRepository('Team\Entity\Team')->findAll();
+        $members = $this->getEntityManager()->getRepository('Member\Entity\Member')->findAll();    
+            
+        if ($user) {      
+           	return array("form" => $form, "user" => $user, "teams" => $teams, "members" => $members);
          }else {
              return array("form" => $form, "teams" => $teams);
          }        

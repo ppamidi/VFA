@@ -2,21 +2,21 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Team\Controller\Index' => 'Team\Controller\IndexController',
+            'Services\Controller\Skeleton' => 'Services\Controller\SkeletonController',
         ),
     ),
     'router' => array(
         'routes' => array(
-        'team' => array(
+            'services' => array(
                 'type'    => 'Literal',
                 'options' => array(
                     // Change this to something specific to your module
-                    'route'    => '/team',
+                    'route'    => '/skeleton',
                     'defaults' => array(
                         // Change this value to reflect the namespace in which
                         // the controllers for your module are found
-                        '__NAMESPACE__' => 'Team\Controller',
-                        'controller'    => 'Index',
+                        '__NAMESPACE__' => 'Services\Controller',
+                        'controller'    => 'Skeleton',
                         'action'        => 'index',
                     ),
                 ),
@@ -29,11 +29,11 @@ return array(
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                             'route'    => '[/:teamName]',
+                            'route'    => '/[:controller[/:action]]',
                             'constraints' => array(
-//                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'teamName' => '[a-zA-Z0-9_-]*',
-                             ),
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
                             'defaults' => array(
                             ),
                         ),
@@ -44,22 +44,7 @@ return array(
     ),
     'view_manager' => array(
         'template_path_stack' => array(
-            'Team' => __DIR__ . '/../view',
+            'Services' => __DIR__ . '/../view',
         ),
-    ),
-    'doctrine' => array(
-    		'driver' => array(
-    				'application_entities' => array(
-    						'class' =>'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-    						'cache' => 'array',
-    						'paths' => array(__DIR__ . '/../src/Team/Entity')
-    				),
-    
-    				'orm_default' => array(
-    						'drivers' => array(
-    								'Team\Entity' => 'application_entities'
-    						)
-    				)
-    		)
     ),
 );

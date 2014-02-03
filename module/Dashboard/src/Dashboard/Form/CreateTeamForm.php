@@ -14,7 +14,7 @@ class CreateTeamForm extends Form{
         parent::__construct ('Create Team');
 
         $this->setAttribute('method', 'post');
-        $this->setAttribute('action', 'dashboard');
+        $this->setAttribute('action', 'dashboard/foo');
         $this->add(array(
                 'name' => 'teamName',
                 'attributes' => array(

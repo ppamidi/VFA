@@ -53,8 +53,7 @@ class IndexController extends AbstractActionController
     	return $this->entityManager;
     }
     
-    public function validateAction(){
-        
+    public function validateAction(){      
         $response = Json::decode($this->getRequest()->getPost('response'), TRUE);    
         if ($response) {
             
@@ -75,7 +74,7 @@ class IndexController extends AbstractActionController
         	 
         	if ($authResult->isValid()){
         		return $this->redirect()->toRoute('dashboard', array(
-        				'action' =>  'foo',
+        				'action' =>  'index',
         		));
         	}else{
         		return $this-> redirect()->toRoute('home');
@@ -89,18 +88,6 @@ class IndexController extends AbstractActionController
     public function indexAction()
     {
         return array();
-    }
-
-    public function retrieveUserAction(){   
-        $response = Json::decode($_POST['user'], true);
-        $userEmail = $response[0]['contact']['email_addresses'][0]['address'];
-        $userImage = $response[0]['mugshot_url'];
-        $userName = $response[0]['full_name'];  
-       
-        $view = new ViewModel(array('name' => $userName, 'email' => $userEmail, 'image' => $userImage));
-        $view->setTerminal(true);
-        $view->setTemplate('userMediaThumbnail.phtml');
-        return $view;
     }
     
     public function fooAction()

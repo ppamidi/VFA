@@ -38,37 +38,53 @@ function logOutUser(){
 	);
 }
 
-function searchUser(){
+function searchMember(){
 		      yam.request({
 		        url: "https://www.yammer.com/api/v1/users/by_email.json",     //this is one of many REST endpoints that are available
 		        method: "GET",
 		        data: {
 		        	'email':$('#srch-term').val()
 		        },
-		        success: function (user) { //print message response information to the console
-		          retrieveUser(user);
+		        success: function (member) { //print message response information to the console         
+		        	retrieveMember(member);
 		        },
-		        error: function (user) {
-		          alert("Unable to find user");
+		        error: function (member) {
+		          alert("Unable to find member");
 		        }
 		      });	      
 }
 
-function retrieveUser(user){
-	var url = BASE_URL + "/user/retrieve-user";
-	$.post(url, {'user': JSON.stringify(user)}, 
-							function(data) {       	
-							 $( "#searchModalBody").append( data );
+function retrieveMember(member){
+	var url = BASE_URL + "/member/retrieve-member";
+	console.dir(member);
+	$.post(url, {'member': JSON.stringify(member)}, 
+							function(memberThumbnail) {       	
+							 $( "#searchModalBody").append( memberThumbnail );
 							 $("#searchModal ").modal(show=true,backdrop=false);
 					        });
 	
+}
+
+function addMember(response){
+	var url = BASE_URL + "/member/add-member";
+	console.dir(response);
+	$.post(url, {'response': JSON.stringify(response)}, 
+			function(data) {       	
+				var defaultHTML = '<div class="input-group"><input type="text" class="form-control" placeholder="Email Address" name="srch-term" id="srch-term"><div class="input-group-btn"><button onclick="searchUser()"  class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-search"></span></button></div></div>';
+				$('#searchModalBody').html(defaultHTML);
+				$("#searchModal ").modal(show=true,backdrop=false);
+	        });
 }
 
 $('#searchModal').on('hidden.bs.modal', function (e) {
 	var defaultHTML = '<div class="input-group"><input type="text" class="form-control" placeholder="Email Address" name="srch-term" id="srch-term"><div class="input-group-btn"><button onclick="searchUser()"  class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-search"></span></button></div></div>';
  	$('#searchModalBody').html(defaultHTML);
 });
-	
+
+$(document).bind('sampleEvent', function(e, data) {
+	alert('Event received');
+});
+
 //$(function() {
 //    $('form[data-async]').on('submit', function(event) {
 //        var $form = $(this);

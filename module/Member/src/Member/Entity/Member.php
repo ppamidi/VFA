@@ -14,7 +14,6 @@ class Member
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      * @var int
      */
     protected $memberId;
@@ -38,6 +37,12 @@ class Member
     protected $lastName;
     
     /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    protected $imgURL;
+    
+    /**
      * @ORM\Column(type="integer")
      * @var Boolean
      */
@@ -50,7 +55,7 @@ class Member
     protected $verified;
 
 	/**
-	 * @return int
+	 * @return Boolean
 	 */
 	public function getMemberId() {
 		return $this->memberId;
@@ -106,6 +111,22 @@ class Member
 	}
 	
 	/**
+	 * @return string
+	 */
+	public function getImgURL() {
+		return $this->imgURL;
+	}
+	
+	/**
+	 * @param string $imgURL
+	 */
+	public function setImgUrl($imgURL) {
+		$this->imgURL = $imgURL;
+		return $this;
+	}
+	
+	
+	/**
 	 * @return Boolean
 	 */
 	public function getActive() {
@@ -146,7 +167,40 @@ class Member
 //      */
 //     protected $updatedAt;
     
-    
+	public  function populateMember($response){		 
+		$this->setMemberId($response[0]['id']);
+		$this->setFirstName($response[0]['first_name']);
+		$this->setLastName($response[0]['last_name']);
+		//$this->setActivatedAt(date("Y-m-d H:i:s",strtotime($response['user']['activated_at'])));
+		$this->setEmailId($response[0]['contact']['email_addresses'][0]['address']);
+		$this->setImgURL($response[0]['mugshot_url']);
+		$this->setActive(true);
+		$this->setVerified(false);		 
+	}
+	
+	public static function findMember($response, $objectManager){
+		$user = $objectManager->find('Member\Entity\Member', $response[0]['id']);
+		if ($user === null) {
+			return FALSE;
+		};
+	
+		return TRUE;
+	}
+	
+	public static function retrieveMember($response, $objectManager){
+		if (Member::findMember($response, $objectManager)) {
+			return $objectManager->find('Member\Entity\Member', $response[0]['id']);
+		}
+		return null;
+	}
+	
+	public function persistMember($response, $objectManager){	
+		if (!Member::findMember($response, $objectManager)) {
+			$this->populateMember($response)	;
+			$objectManager->persist($this);
+			$objectManager->flush();
+		}
+	}
 }
 
 ?>

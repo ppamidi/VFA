@@ -1,5 +1,4 @@
 <?php
-use Dashboard;
 return array(
     'controllers' => array(
         'invokables' => array(
@@ -24,10 +23,11 @@ return array(
             ),
         ),
     ),
-    'template_map' => array(
-    		
-    ),
+    
     'view_manager' => array(
+        'template_map' => array(
+        	'dashboard/memberlist' =>  __DIR__ . '/../view/Partial/MemberList.phtml',
+        ),
         'template_path_stack' => array(
             'Dashboard' => __DIR__ . '/../view',
           ),
