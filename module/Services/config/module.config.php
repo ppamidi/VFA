@@ -2,7 +2,7 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Services\Controller\Skeleton' => 'Services\Controller\SkeletonController',
+            'Index' => 'Services\Controller\IndexController',
         ),
     ),
     'router' => array(
@@ -11,40 +11,37 @@ return array(
                 'type'    => 'Literal',
                 'options' => array(
                     // Change this to something specific to your module
-                    'route'    => '/skeleton',
+                    'route'    => '/services',
                     'defaults' => array(
                         // Change this value to reflect the namespace in which
                         // the controllers for your module are found
-                        '__NAMESPACE__' => 'Services\Controller',
-                        'controller'    => 'Skeleton',
+                        'controller'    => 'Index',
                         'action'        => 'index',
                     ),
                 ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    // This route is a sane default when developing a module;
-                    // as you solidify the routes for your module, however,
-                    // you may want to remove it and replace it with more
-                    // specific routes.
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
-                    ),
+                 'teams' => array(
+            		'type'    => 'Zend\Mvc\Router\Http\Segment',
+            		'options' => array(
+            				'route'    => '/Hercules/Services/RegisterDevice[/:UniqueDeviceID][/:DeviceSerialNumber]',
+            				'constraints' => array(
+            						'UniqueDeviceID' => '[a-zA-Z][a-zA-Z0-9_-]*',
+            						'DeviceSerialNumber' => '[a-zA-Z][a-zA-Z0-9_-]*'
+            				),
+            				'defaults' => array(
+            						'controller' => 'RegisterDevice',
+            				),
+            		),
                 ),
-            ),
+           ),
         ),
+        
     ),
     'view_manager' => array(
         'template_path_stack' => array(
             'Services' => __DIR__ . '/../view',
+        ),
+        'strategies' => array(
+        		'ViewJsonStrategy',
         ),
     ),
 );

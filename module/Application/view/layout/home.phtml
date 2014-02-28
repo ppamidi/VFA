@@ -1,6 +1,6 @@
 <?php echo $this->doctype(); ?>
 
-<html lang="en">
+<html lang="en" ng-app="vfaApp">
     <head>
         <meta charset="utf-8">
        
@@ -8,9 +8,10 @@
      	<?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
     
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-                        ->prependStylesheet($this->basePath() . '/css/style.css')
-                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') 
-                         ->prependStylesheet($this->basepath().'/css/font-awesome/css/font-awesome.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/theme.css')
+                        ->prependStylesheet($this->basePath() . '/css/style.css')           
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')                     
+                        ->prependStylesheet($this->basepath().'/css/font-awesome/css/font-awesome.min.css')
                         ?>
   </head>
     <body>
@@ -23,30 +24,28 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#"><?php echo $this->translate('VFA')?></a>
+              <a class="navbar-brand" href="<?php $this->url('home')?>"><?php echo $this->translate('VFA')?></a>
             </div>
             <div class="collapse navbar-collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#"><?php echo $this->translate('Home')?></a></li>
+                <li class="active"><a href="<?php $this->url('home')?>"><?php echo $this->translate('Home')?></a></li>
                 <li><a href="#about"><?php echo $this->translate('About')?></a></li>
                </ul>
                
             <ul class="nav navbar-nav navbar-right navbar-user">
             <li class="dropdown user-dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php $user = $this->user; echo $user->getFirstName();?><b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Prasad Pamidi<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-                <li><a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge">7</span></a></li>
                 <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
                 <li class="divider"></li>
-                <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
+                <li><a onclick="logOutUser()"><i class="fa fa-power-off"></i> Log Out</a></li>
               </ul>
             </li>
           </ul>
           </div><!--/.nav-collapse -->
           </div>
         </div>
-        <div class="container">
+        <div class="container">  
             <div class="layout-container">
                 <?php echo $this->content; ?>
             </div>
@@ -63,13 +62,17 @@
           var BASE_URL = window.location.protocol + "//" + window.location.host + "/" + pathArray[1] + "/" + pathArray[2];
         </script>
       <script type="text/javascript" data-app-id="CozA2dfQxcmP7kFpYZk5w" src="https://assets.yammer.com/platform/yam.js"></script>
-      <?php echo $this->headScript()->prependFile($this->basePath() . '/js/functions.js') 
+        <?php echo $this->headScript()->prependFile($this->basePath() . '/js/functions.js') 
                                       ->prependFile($this->basePath() . '/js/holder.js')
+                                      ->prependFile($this->basePath() . '/js/controllers.js')
+                                      ->prependFile($this->basePath() . '/lib/angular/angular.min.js')
+                                      ->prependFile($this->basePath() . '/js/modernizr-2.6.2.min.js')
         							  ->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
                                       ->prependFile($this->basePath() . '/js/bootstrap.min.js')
                                       ->prependFile($this->basePath() . '/js/jquery.redirect.min.js')
-                                      ->prependFile($this->basePath() . '/js/jquery.min.js')
-        							  ?>
+                                      ->prependFile($this->basePath() . '/lib/jquery/jquery-1.10.2.min.js')
+                                      
+                                 	  ?>
         <?php echo $this->inlineScript() ?>
     </body>
 </html>

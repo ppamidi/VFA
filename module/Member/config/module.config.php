@@ -13,7 +13,7 @@ return array(
                 		'route'    => '/member[/:action][/:member]',
                 		'constraints' => array(
                 		        'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                				'member'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                				'member'     => '[a-zA-Z0-9_-]*',
                 		),
                 		'defaults' => array(
                 				'controller' => 'Member\Controller\Index',

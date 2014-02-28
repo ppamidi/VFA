@@ -21,12 +21,6 @@ class Role
      * @var int
      */
     protected $roleId;
-    
-    /**
-     * @ORM\Column(type="string", length=64)
-     * @var string
-     */
-    
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -42,7 +36,7 @@ class Role
 	}
 	
 	/**
-	 * @param int $roleId
+	 * @param $roleId
 	 */
 	public function setRoleId($roleId) {
 		$this->roleId = $roleId;

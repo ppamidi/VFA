@@ -36,7 +36,7 @@ class TeamMemberRole
 * @ORM\ManyToOne(targetEntity="Member\Entity\Role")
 *  @ORM\JoinColumn(name="role", referencedColumnName="roleId")
 */
-   protected $role;
+   protected $roleId;
    
    /**
     * @access public
@@ -87,7 +87,7 @@ class TeamMemberRole
 	 * @return Application\Entity\Role
 	 */
 	public function getRole() {
-		return $this->role;
+		return $this->roleId;
 	}
 	
 	/**
@@ -96,7 +96,7 @@ class TeamMemberRole
 	* @return Application/Entity/TeamMemberRole
 	*/
 	public function setRole($role) {
-		$this->role = $role;
+		$this->roleId = $role;
 		return $this;
 	}
 

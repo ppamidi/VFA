@@ -63,58 +63,12 @@
           </div>
          </div>
 </div><!-- /.row -->
-						
+            
  <div class="row">
-        <div class="col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    Teams
-                    <a class="btn btn-xs pull-right btn-danger" data-toggle="modal" data-target="#myModal">
-                      <i class="fa fa-plus 2x"></i>
-                    </a>
-                </div>
-                <div class="panel-body">
-                     <div class="row">
-                       <ul class="thumbnails list-unstyled">
-                       
-                       <?php  $teams = $this->teams;
-                               foreach ($teams as $team){
-                         ?>
-                          <li class="col-sm-4 col-md-4 col-lg-4">
-                            <div  class="thumbnail">
-                               <p align="center"> <?php echo $team->getTeamName();?></p>
-                                <a href="<?php echo $this->url('team/default', array('teamName' => $team->getTeamId()));?>">
-                                    <img data-src="holder.js/120x120" class="img-rounded" alt=<?php echo $team->getTeamName();?> style="width: 150px; height: 90px;" src="mySrc">
-                                </a>  
-                            </div>
-                           </li>
-                          
-                        <?php }?>
-                        </ul>  
-                   
-                    </div>      
-                    <ul class="pager">
-                        <li class="previous disabled"><a href="#">&larr; Older</a></li>
-                        <li class="next"><a href="#">Newer &rarr;</a></li>
-                     </ul>
-                </div>
-            </div>
-        </div>
-        <?php echo $this->partial('dashboard/memberlist', array('members' => $this->members));?>                 
-        <div class="col-md-6">
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    Recent Activity
-                </div>
-                <div class="panel-body">
-                    <?php 
-                        $teams = $this->teams;
-                        var_dump($teams);
-                    ?>
-                    
-                </div>
-            </div>
-        </div>
+       <?php echo $this->partial('dashboard/teamList', array('teams' => $this->teams));?> 
+       <?php echo $this->partial('dashboard/memberlist', array('members' => $this->members));?> 
+       <?php echo $this->partial('dashboard/testAngularPartial');?>                
+
 </div><!--/row-->
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

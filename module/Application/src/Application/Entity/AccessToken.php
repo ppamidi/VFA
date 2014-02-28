@@ -2,61 +2,57 @@
 namespace Application\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
-/** @ORM\Entity */
+
+/** @ORM\Entity 
+ * @ORM\Table(name="AccessToken",uniqueConstraints = {@ORM\UniqueConstraint(name="user_token_idx", columns={"user", "network"})})
+ * */
 class AccessToken
 {   
     /**
      *  @ORM\Id 
      *  @ORM\Column(type="integer")
+     *  @ORM\ManyToOne(targetEntity="User\Entity\User")
+     *  @ORM\JoinColumn(name="user", referencedColumnName="userId")
      *  */
-    protected $userId;
+    protected $user;
     
-    /** @ORM\Column(type="string") */
-    protected $networkId;
-
-    /** @ORM\Column(type="string") */
-    protected $networkName;
-    
+    /** 
+     *  @ORM\Column(type="integer")
+     *  @ORM\ManyToOne(targetEntity="User\Entity\User")
+     *  @ORM\JoinColumn(name="user", referencedColumnName="networkId")
+     * */
+    protected $network;
+ 
     /** @ORM\Column(type="string") */
     protected $tokenId;
     
-    /** @ORM\Column(type="date") */
-    protected $createdAt;
+//     /** @ORM\Column(type="date") */
+//     protected $createdAt;
     
-    /** @ORM\Column(type="date") */
-    protected $updatedAt;
+//     /** @ORM\Column(type="date") */
+//     protected $updatedAt;
         
-    /** @ORM\Column(type="string") */
-    protected $fullName;
+//     /** @ORM\Column(type="string") */
+//     protected $fullName;
     
-    public function getUserId()
+    public function getUser()
     {
-    	return $this->userId;
+    	return $this->user;
     }
     
-    public function setUserId($value)
+    public function setUser($value)
     {
-    	$this->userId = $value;
+    	$this->user = $value;
     }
     
-    public function getNetworkId()
+    public function getNetwork()
     {
-    	return $this->networkId;
+    	return $this->network;
     }
     
-    public function setNetworkId($value)
+    public function setNetwork($value)
     {
-    	$this->networkId = $value;
-    }
-    
-    public function getNetworkName()
-    {
-    	return $this->networkName;
-    }
-    
-    public function setNetworkName($value)
-    {
-    	$this->networkName = $value;
+    	$this->network = $value;
     }
     
     public function getTokenId()
@@ -69,33 +65,73 @@ class AccessToken
     	$this->tokenId = $value;
     }
     
-    public function getCreatedAt()
-    {
-    	return $this->createdAt;
-    }
+//     public function getCreatedAt()
+//     {
+//     	return $this->createdAt;
+//     }
     
-    public function setCreatedAt($value)
-    {
-    	$this->createdAt = date("Y-m-d H:i:s",strtotime($value));
-    }
-    public function getUpdatedAt()
-    {
-    	return $this->updatedAt;
-    }
+//     public function setCreatedAt($value)
+//     {
+//     	$this->createdAt = date("Y-m-d H:i:s",strtotime($value));
+//     }
+//     public function getUpdatedAt()
+//     {
+//     	return $this->updatedAt;
+//     }
     
-    public function setUpdatedAt($value)
-    {
-    	$this->updatedAt = date("Y-m-d H:i:s",strtotime($value));
-    }
+//     public function setUpdatedAt($value)
+//     {
+//     	$this->updatedAt = date("Y-m-d H:i:s",strtotime($value));
+//     }
     
-    public function getFullName()
-    {
-    	return $this->fullName;
-    }
+//     public function getFullName()
+//     {
+//     	return $this->fullName;
+//     }
         
-    public function setFullName($value)
-    {
-    	$this->fullName = $value;
+//     public function setFullName($value)
+//     {
+//     	$this->fullName = $value;
+//     }
+
+    public static function populateAccessToken($response){
+        $token = new AccessToken();    
+        $token->setUser($response['user']['id']);
+        $token->setNetwork($response['network']['id']);
+        $token->setTokenId($response['access_token']['token']);
+        
+        return $token;
+     }
+    
+//     public static function findAccessToken($objectManager){
+//         $token = $objectManager->findAll('Application\Entity\AccessToken');
+//         if ($token === null) {
+//             return FALSE;
+//         };
+    
+//         return TRUE;
+//     }
+    
+  
+    public static function persistAccessToken($response, $objectManager){
+        $tokens = self::retrieveAccessToken($objectManager);
+        $token = $tokens[0];
+        if (!$token) {
+            $token = self::populateAccessToken($response);
+            $objectManager->persist($token);
+        }else {
+            $token->setUser($response['user']['id']);
+            $token->setNetwork($response['network']['id']);
+            $token->setTokenId($response['access_token']['token']);
+            $objectManager->persist($token);
+            
+        }
+        $objectManager->flush();
     }
+    
+    public static function retrieveAccessToken($objectManager){
+        return $objectManager->getRepository('Application\Entity\AccessToken')->findAll();
+    }
+    
 }
 

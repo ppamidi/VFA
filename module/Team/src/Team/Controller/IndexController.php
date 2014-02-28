@@ -15,7 +15,8 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {    
-        var_dump($this->params()->fromRoute());
+          $this->layout('layout/home');
+        
         return array();
     }
 

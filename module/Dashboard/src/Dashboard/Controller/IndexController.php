@@ -87,8 +87,6 @@ class IndexController extends AbstractActionController
         if ($user = $this->identity()) {
         	 $user = $this->identity();
         }
-        
-        
        
         $team = new Team();
         $form = new CreateTeamForm();

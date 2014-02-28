@@ -1,0 +1,38 @@
+<div class="col-md-6" ng-controller= 'TeamListController'>
+     <div class="panel panel-warning">
+       <div class="panel-heading">
+            <div class="pull-left">
+            <h4><i></i> Teams</h4>
+           </div>
+           <a class="btn btn-xs pull-right btn-danger" data-toggle="modal" data-target="#myModal">
+              <i class="fa fa-plus 2x"></i>
+            </a>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body no-padding">
+             <div class="row">
+               <ul class="thumbnails list-unstyled">
+               
+               <?php  $teams = $this->teams;
+                       foreach ($teams as $team){
+                 ?>
+                  <li class="col-xs-6 col-sm-3 col-md-4 col-lg-3">
+                    <div  class="thumbnail">
+                       <p align="center"> <?php echo $team->getTeamName();?></p>
+                        <a href="<?php echo $this->url('team', array('teamName' => $team->getTeamId()));?>">
+                            <img data-src="holder.js/90x90" class="img-rounded" alt=<?php echo $team->getTeamName();?> style="width: 90px; height: 90px;" src="mySrc">
+                        </a>  
+                    </div>
+                   </li>
+                  
+                <?php }?>
+                </ul>  
+           
+            </div>      
+            <ul class="pager">
+                <li class="previous disabled"><a href="#">&larr; Previous</a></li>
+                <li class="next"><a href="#">Next &rarr;</a></li>
+             </ul>
+        </div>
+    </div>
+</div>

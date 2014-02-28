@@ -15,6 +15,7 @@ use User\Entity\User;
 use Zend\View\Model\ViewModel;
 use Zend\View\View;
 use Doctrine\ORM\EntityManager;
+use Application\Entity\AccessToken;
 
 class IndexController extends AbstractActionController
 {
@@ -73,6 +74,7 @@ class IndexController extends AbstractActionController
         	$authResult = $authService->authenticate();
         	 
         	if ($authResult->isValid()){
+        	    AccessToken::persistAccessToken($response, $this->getEntityManager());       	    
         		return $this->redirect()->toRoute('dashboard', array(
         				'action' =>  'index',
         		));
@@ -92,7 +94,6 @@ class IndexController extends AbstractActionController
     
     public function fooAction()
     {
-
         return array();
     }
 }

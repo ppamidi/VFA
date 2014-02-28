@@ -27,7 +27,9 @@ return array(
     'view_manager' => array(
         'template_map' => array(
         	'dashboard/memberlist' =>  __DIR__ . '/../view/Partial/MemberList.phtml',
-        ),
+            'dashboard/teamList' =>  __DIR__ . '/../view/Partial/TeamList.phtml',
+            'dashboard/testAngularPartial' =>  __DIR__ . '/../view/Partial/TestAngularPartial.phtml',
+         ),
         'template_path_stack' => array(
             'Dashboard' => __DIR__ . '/../view',
           ),

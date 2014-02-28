@@ -1,0 +1,17 @@
+<div class="col-md-6" ng-controller="TestPartialCtrl">
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+            Recent Activity
+        </div>
+        <div class="panel-body">
+             Search: <input ng-model="query">
+             <ul>
+                <li ng-repeat="phone in phones  | filter:query">
+                  {{phone.name}}
+                  <p>{{phone.snippet}}</p>
+                </li>
+              </ul>
+            
+        </div>
+    </div>
+</div>

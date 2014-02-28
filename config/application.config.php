@@ -8,11 +8,13 @@ return array(
         'DoctrineORMModule',
         'ZendDeveloperTools',
         'TwbBundle',
-        'Dashboard',
         'User',
         'Team',
         'Member',
-        'Services'
+        'Crons',
+        'Services',
+        'Dashboard',
+        'Post',
     ),
 
     // These are various options for the listeners attached to the ModuleManager

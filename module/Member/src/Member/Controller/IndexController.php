@@ -75,7 +75,7 @@ class IndexController extends AbstractActionController
     
     public function addMemberAction(){
         
-        $this->layout('layout/home');
+          $this->layout('layout/home');
          
          $response = $this->getResponse();
          $request = Json::decode($_POST['response'], true);
@@ -96,7 +96,7 @@ class IndexController extends AbstractActionController
         return $response;
     }
     
-    public function fooAction()
+    public function showMemberAction()
     {
         // This shows the :controller and :action parameters in default route
         // are working when you browse to /index/index/foo

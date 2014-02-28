@@ -4,8 +4,6 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/vendor/ZF2/library" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/dlu/dlutwbootstrap" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/dlu/dlutwbootstrapdemo" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/cache" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/collections" />
@@ -19,6 +17,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/mongodb" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/mongodb-odm" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/orm" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/neilime/zf2-twb-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-code-coverage" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-file-iterator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/php-text-template" />
@@ -28,6 +27,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/phpunit/phpunit-mock-objects" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/console" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/yaml" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/zendexperts/phpids" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/zendexperts/ze-security" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/zendframework/zend-developer-tools" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/zendframework/zendframework" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/zendframework/zftool" />
@@ -39,21 +40,21 @@
     <orderEntry type="module-library">
       <library name="PHARS">
         <CLASSES>
-          <root url="phar://$MODULE_DIR$/composer.phar" />
-          <root url="phar://$MODULE_DIR$/phpunit.phar" />
-          <root url="phar://$MODULE_DIR$/zftool.phar" />
+          <root url="phar:///Users/Tittu/Desktop/Capgemini/Zend-Repo/VFA/composer.phar" />
+          <root url="phar:///Users/Tittu/Desktop/Capgemini/Zend-Repo/VFA/phpunit.phar" />
+          <root url="phar:///Users/Tittu/Desktop/Capgemini/Zend-Repo/VFA/zftool.phar" />
         </CLASSES>
         <SOURCES>
-          <root url="phar://$MODULE_DIR$/composer.phar" />
-          <root url="phar://$MODULE_DIR$/phpunit.phar" />
-          <root url="phar://$MODULE_DIR$/zftool.phar" />
+          <root url="phar:///Users/Tittu/Desktop/Capgemini/Zend-Repo/VFA/composer.phar" />
+          <root url="phar:///Users/Tittu/Desktop/Capgemini/Zend-Repo/VFA/phpunit.phar" />
+          <root url="phar:///Users/Tittu/Desktop/Capgemini/Zend-Repo/VFA/zftool.phar" />
         </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">
       <library name="PHP">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/vendor/dlu/dlutwbootstrapdemo" />
+          <root url="file://$MODULE_DIR$/vendor/zendexperts/phpids" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/mongodb-odm" />
           <root url="file://$MODULE_DIR$/vendor/symfony/console" />
@@ -73,7 +74,6 @@
           <root url="file://$MODULE_DIR$/vendor/doctrine/doctrine-orm-module" />
           <root url="file://$MODULE_DIR$/vendor/ZF2/library" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
-          <root url="file://$MODULE_DIR$/vendor/dlu/dlutwbootstrap" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/inflector" />
           <root url="file://$MODULE_DIR$/vendor/zf-commons/zfc-base" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/collections" />
@@ -81,12 +81,14 @@
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-text-template" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-token-stream" />
           <root url="file://$MODULE_DIR$/vendor/zendframework/zend-developer-tools" />
+          <root url="file://$MODULE_DIR$/vendor/zendexperts/ze-security" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/common" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-code-coverage" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/cache" />
+          <root url="file://$MODULE_DIR$/vendor/neilime/zf2-twb-bundle" />
         </CLASSES>
         <SOURCES>
-          <root url="file://$MODULE_DIR$/vendor/dlu/dlutwbootstrapdemo" />
+          <root url="file://$MODULE_DIR$/vendor/zendexperts/phpids" />
           <root url="file://$MODULE_DIR$/vendor/composer" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/mongodb-odm" />
           <root url="file://$MODULE_DIR$/vendor/symfony/console" />
@@ -106,7 +108,6 @@
           <root url="file://$MODULE_DIR$/vendor/doctrine/doctrine-orm-module" />
           <root url="file://$MODULE_DIR$/vendor/ZF2/library" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
-          <root url="file://$MODULE_DIR$/vendor/dlu/dlutwbootstrap" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/inflector" />
           <root url="file://$MODULE_DIR$/vendor/zf-commons/zfc-base" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/collections" />
@@ -114,9 +115,11 @@
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-text-template" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-token-stream" />
           <root url="file://$MODULE_DIR$/vendor/zendframework/zend-developer-tools" />
+          <root url="file://$MODULE_DIR$/vendor/zendexperts/ze-security" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/common" />
           <root url="file://$MODULE_DIR$/vendor/phpunit/php-code-coverage" />
           <root url="file://$MODULE_DIR$/vendor/doctrine/cache" />
+          <root url="file://$MODULE_DIR$/vendor/neilime/zf2-twb-bundle" />
         </SOURCES>
       </library>
     </orderEntry>
